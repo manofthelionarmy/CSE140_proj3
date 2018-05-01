@@ -29,8 +29,8 @@ void reordering(int m, int n, float *A, float *C){
 }
 void unrolloing(int m, int n, float *A, float *C){
 	int f = m % 4; 
-	for(int k = 0; k < n; k++ ){
-		for(int j = 0; j < m; j++  ){
+	for(int j = 0; j < m; j++ ){
+		for(int k = 0; k < n; k++){
 			for( int i = 0; i <= (m-f-4); i+=4 ){
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
 				C[(i+1)+(j)*m] += A[(i+1)+k*m] * A[(j)+k*m];
@@ -40,8 +40,8 @@ void unrolloing(int m, int n, float *A, float *C){
 		}
 	}
 	if( f == 3){
-		for( int k = 0; k < n; k++){
-			for(int j = 0; j < m; j++){
+		for(int j = 0; j < m; j++){
+			for(int k = 0; k < n; k++){
 				for(int i = (m-f); i < m; i+=3 ){
 					C[i+j*m] += A[i+k*m] * A[j+k*m];
 					C[(i+1)+(j)*m] += A[(i+1)+k*m] * A[(j)+k*m];
@@ -52,8 +52,8 @@ void unrolloing(int m, int n, float *A, float *C){
 		return; 
 	}
 	if(f == 2){
-		for( int k = 0; k < n; k++ ){
-			for( int j = 0; j < m; j++ ){
+		for( int j = 0; j < m; j++){
+			for( int k = 0; k < n; k++ ){
 				for( int i = (m-f); i < m; i+=2){
 					C[i+j*m] += A[i+k*m] * A[j+k*m];
 					C[(i+1)+(j)*m] += A[(i+1)+k*m] * A[(j)+k*m];
@@ -63,8 +63,8 @@ void unrolloing(int m, int n, float *A, float *C){
 		return; 
 	}
 	if( f == 1){
-		for( int k = 0; k < n; k++  ){
-			for( int j = 0; j < m; j++){
+		for( int j = 0; j < m; j++){
+			for( int k = 0; k < n; k++ ){
 				for(  int i = (m-f); i < m; i++){
 					C[i+j*m] += A[i+k*m] * A[j+k*m];
 				}
