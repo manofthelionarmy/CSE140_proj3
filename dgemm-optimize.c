@@ -4,6 +4,14 @@ void peepholeOptimization(int m, int n, float *A, float *C){
 
 }
 void registerBlocking(int m, int n, float *A, float *C){
+	for( int i = 0; i < m; i++ ){
+    	for( int k = 0; k < n; k++ ){
+    		float a = A[i+k*m];
+      		for( int j = 0; j < m; j++ ){ 
+				C[i+j*m] += a * A[j+k*m];
+			}
+		}
+	}
 
 }
 void blocking(int m, int n, float *A, float *C){
@@ -84,7 +92,8 @@ void dgemm( int m, int n, float *A, float *C )
 {
 // FILL-IN 
 
-	//reordering(m, n, A, C); 
+	reordering(m, n, A, C); 
 	unrolloing(m, n, A, C);
+	registerBlocking(m, n, A, C);
   
 }
